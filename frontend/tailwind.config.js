@@ -2,7 +2,7 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
-      primary: 'Hind Siliguri',
+      primary: 'Roboto',
     },
     container: {
       padding: {

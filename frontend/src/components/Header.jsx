@@ -1,59 +1,44 @@
 import React, { useState, useEffect } from 'react';
 
-// import components
-import MobileNav from './MobileNav';
-import Navbar from '../components/Navbar';
+// import icons
+import { LuShoppingBasket, LuUser2 } from 'react-icons/lu';
 
-export const header = {
-  logo: 'LogoImg',
-  btnText: 'Request a demo',
-};
+// import assets
+import { header } from '../assets/assets';
 
 const Header = () => {
   // mobile nav state
   const [mobileNav, setMobileNav] = useState(false);
+
   // header state
   const [isActive, setIsActive] = useState(false);
+
   // destructure header data
   const { logo, btnText } = header;
+
   // scroll event
   useEffect(() => {
     window.addEventListener('scroll', () => {
       window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
     });
   });
+
   return (
-    <header
-      className={`${
-        isActive ? 'lg:top-0 bg-white shadow-2xl' : 'lg:top-[60px]'
-      } py-6 lg:py-4 fixed w-full transition-all z-10`}
-    >
+    <header className='bg-white border-b boder-gray-200 py-6 lg:py-4 w-full transition-all z-10'>
       <div className='container mx-auto flex justify-between items-center'>
         {/* logo */}
-        <a href='/'>{/* <img src={logo} alt='logo' /> */}</a>
-        {/* nav - initially hidden - show on desktop mode */}
-        <div className='hidden lg:flex'>
-          <Navbar />
-        </div>
-        {/* cta button - initially hidden - show on desktop mode*/}
-        <button className='btn btn-sm btn-outline hidden lg:flex'>
-          {btnText}
-        </button>
-        {/* mobile nav trigger btn - hidden on desktop */}
-        <button className='lg:hidden' onClick={() => setMobileNav(!mobileNav)}>
-          {mobileNav ? (
-            <HiOutlineX className='text-3xl text-accent' />
-          ) : (
-            <HiMenuAlt4 className='text-3xl text-accent' />
-          )}
-        </button>
-        {/* mobile nav - hidden on desktop */}
-        <div
-          className={`${
-            mobileNav ? 'left-0' : '-left-full'
-          } fixed top-0 bottom-0 w-[60vw] lg:hidden transition-all`}
-        >
-          <MobileNav />
+        <a href='/'>
+          <img src={logo} alt='logo' />
+        </a>
+
+        {/* buttons */}
+        <div className='flex items-center gap-x-2'>
+          <button className='rounded-full btn btn-sm btn-outline p-2 w-12 h-12 flex items-center justify-center'>
+            <LuShoppingBasket className='text-2xl' />
+          </button>
+          <button className='rounded-full btn btn-sm btn-outline p-2 w-12 h-12 flex items-center justify-center'>
+            <LuUser2 className='text-2xl' />
+          </button>
         </div>
       </div>
     </header>
