@@ -57,7 +57,11 @@
   .btn-link {
     @apply text-accent text-xl lg:text-2xl;
   }
-  .customScrollbar::-webkit-scrollbar {
+  .custom_scrollbar::-webkit-scrollbar {
     display: none;
+  }
+  .custom_scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
