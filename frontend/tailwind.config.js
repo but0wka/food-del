@@ -24,11 +24,7 @@ module.exports = {
         accentHover: '#e05216',
         grey: '#F5F5F5',
       },
-      backgroundImage: {
-        overview: "url('/src/assets/img/overview/bg.svg')",
-        cta: "url('/src/assets/img/cta/bg.svg')",
-      },
     },
   },
-  plugins: [],
+  plugins: ['prettier-plugin-tailwindcss'],
 };
