@@ -47,7 +47,7 @@ const StoreContextProvider = (props) => {
         }
       } catch (error) {}
     }
-    return Math.round(totalAmount * 100) / 100;
+    return (Math.round(totalAmount * 100) / 100).toFixed(2);
   };
 
   const getTotalCartItems = () => {
