@@ -236,7 +236,7 @@ const PlaceOrder = () => {
             </div>
           </div>
           <button
-            className='w-full rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300'
+            className='btn btn-md btn-accent flex justify-center items-center'
             type='submit'
           >
             {payment === 'cod' ? 'Place Order' : 'Proceed To Payment'}
