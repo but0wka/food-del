@@ -52,7 +52,7 @@ const PlaceOrder = () => {
     let orderData = {
       address: data,
       items: orderItems,
-      amount: parseFloat((getTotalCartAmount() + deliveryCharge).toFixed(2)),
+      amount: getTotalCartAmount() + deliveryCharge,
     };
     if (payment === 'stripe') {
       let response = await axios.post(url + '/api/order/place', orderData, {
