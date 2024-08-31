@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import InputField from './InputField'; // Імпортуємо компонент
+import InputField from './InputField';
 import { StoreContext } from '../../Context/StoreContext';
 import { assets } from '../../assets/assets';
 
@@ -39,9 +39,16 @@ const PlaceOrder = () => {
     setData((data) => ({ ...data, [name]: value }));
   };
 
+  const calculateTotalAmount = () => {
+    const subtotal = parseFloat(getTotalCartAmount());
+    const deliveryFee = parseFloat(deliveryCharge);
+    return parseFloat((subtotal + deliveryFee).toFixed(2));
+  };
+
   const placeOrder = async (e) => {
     e.preventDefault();
     let orderItems = [];
+
     food_list.forEach((item) => {
       if (cartItems[item._id] > 0) {
         let itemInfo = item;
@@ -49,32 +56,39 @@ const PlaceOrder = () => {
         orderItems.push(itemInfo);
       }
     });
+
     let orderData = {
       address: data,
       items: orderItems,
-      amount: getTotalCartAmount() + deliveryCharge,
+      amount: calculateTotalAmount(),
     };
-    if (payment === 'stripe') {
-      let response = await axios.post(url + '/api/order/place', orderData, {
-        headers: { token },
-      });
-      if (response.data.success) {
-        const { session_url } = response.data;
-        window.location.replace(session_url);
+
+    try {
+      let response;
+      if (payment === 'stripe') {
+        response = await axios.post(url + '/api/order/place', orderData, {
+          headers: { token },
+        });
+        if (response.data.success) {
+          const { session_url } = response.data;
+          window.location.replace(session_url);
+        } else {
+          throw new Error('Payment failed');
+        }
       } else {
-        toast.error('Something Went Wrong');
+        response = await axios.post(url + '/api/order/placecod', orderData, {
+          headers: { token },
+        });
+        if (response.data.success) {
+          navigate('/myorders');
+          toast.success(response.data.message);
+          setCartItems({});
+        } else {
+          throw new Error('Order placement failed');
+        }
       }
-    } else {
-      let response = await axios.post(url + '/api/order/placecod', orderData, {
-        headers: { token },
-      });
-      if (response.data.success) {
-        navigate('/myorders');
-        toast.success(response.data.message);
-        setCartItems({});
-      } else {
-        toast.error('Something Went Wrong');
-      }
+    } catch (error) {
+      toast.error('Something went wrong: ' + error.message);
     }
   };
 
@@ -172,25 +186,23 @@ const PlaceOrder = () => {
               <dt>Subtotal</dt>
               <dd>
                 {currency}
-                {getTotalCartAmount()}
+                {parseFloat(getTotalCartAmount()).toFixed(2)}
               </dd>
             </dl>
             <dl className='flex justify-between text-base text-gray-900'>
               <dt>Delivery Fee</dt>
               <dd>
                 {currency}
-                {getTotalCartAmount() === 0 ? 0 : deliveryCharge}
+                {getTotalCartAmount() === 0
+                  ? '0.00'
+                  : deliveryCharge.toFixed(2)}
               </dd>
             </dl>
             <dl className='flex justify-between text-xl font-bold text-gray-900'>
               <dt>Total</dt>
               <dd>
                 {currency}
-                {getTotalCartAmount() === 0
-                  ? 0
-                  : parseFloat(
-                      (getTotalCartAmount() + deliveryCharge).toFixed(2)
-                    )}
+                {calculateTotalAmount()}
               </dd>
             </dl>
           </div>
