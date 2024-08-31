@@ -102,7 +102,7 @@ const PlaceOrder = () => {
   }, [token]);
 
   return (
-    <form onSubmit={placeOrder} className='py-16 container mx-auto'>
+    <form onSubmit={placeOrder} className='py-6 container mx-auto'>
       <div className='grid grid-cols-1 gap-12 lg:grid-cols-2'>
         <div className='space-y-4'>
           <h2 className='text-2xl font-semibold text-gray-900'>
@@ -236,7 +236,7 @@ const PlaceOrder = () => {
             </div>
           </div>
           <button
-            className='btn btn-md btn-accent flex justify-center items-center'
+            className='btn btn-sm btn-accent flex justify-center items-center w-full'
             type='submit'
           >
             {payment === 'cod' ? 'Place Order' : 'Proceed To Payment'}
