@@ -24,7 +24,7 @@ const Footer = () => {
                 return (
                   <li key={index}>
                     <a
-                      className='w-full whitespace-nowrap p-3 inline-flex justify-center items-center text-sm  font-medium rounded-lg border border-transparent bg-accent text-white hover:bg-accentHover focus:outline-none focus:bg-blue-700'
+                      className='w-full whitespace-nowrap p-3 inline-flex justify-center items-center text-sm  font-medium rounded-lg border border-transparent bg-accent text-white hover:bg-accentHover'
                       href={
                         type === 'Email' ? `mailto:${value}` : `tel:${value}`
                       }
