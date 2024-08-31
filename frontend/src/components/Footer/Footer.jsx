@@ -47,13 +47,13 @@ const Footer = () => {
             <div className='flex flex-col gap-y-3 sm:gap-x-3 mt-3 sm:mt-4'>
               <a
                 href={appDownload.googlePlay.url}
-                className='w-full whitespace-nowrap p-3 inline-flex justify-center items-center text-sm sm:text-sm font-medium rounded-lg border border-transparent bg-black text-white hover:bg-accentHover focus:outline-none focus:bg-blue-700'
+                className='w-full whitespace-nowrap p-3 inline-flex justify-center items-center text-sm sm:text-sm font-medium rounded-lg border border-transparent bg-black text-white hover:bg-black/90'
               >
                 <FaGooglePlay className='mr-1 sm:mr-2' /> Google Play
               </a>
               <a
                 href={appDownload.appStore.url}
-                className='w-full whitespace-nowrap p-3 inline-flex justify-center items-center text-sm sm:text-sm font-medium rounded-lg border border-transparent bg-black text-white hover:bg-accentHover focus:outline-none focus:bg-blue-700'
+                className='w-full whitespace-nowrap p-3 inline-flex justify-center items-center text-sm sm:text-sm font-medium rounded-lg border border-transparent bg-black text-white hover:bg-black/90'
               >
                 <FaApple className='mr-1 sm:mr-2' /> App Store
               </a>
@@ -80,7 +80,7 @@ const Footer = () => {
                   ></input>
                 </div>
                 <a
-                  className='w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-accent text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none'
+                  className='w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-accent text-white hover:bg-accentHover focus:outline-none focus:bg-accentHover disabled:opacity-50 disabled:pointer-events-none'
                   href='#'
                 >
                   Subscribe
